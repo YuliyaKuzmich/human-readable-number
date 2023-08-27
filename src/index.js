@@ -1,6 +1,8 @@
  module.exports = function toReadable (number) {    
     
-    let number1 = number.toString();
+    let numberString = number.toString();
+    let strLength = numberString.length;
+
     const numTwenty = {
         0: 'zero',
         1: 'one',
@@ -25,8 +27,6 @@
        
     }
     
-    let strLength = number1.length;
-
     const twentyPlus = {
         2: 'twenty',
         3: 'thirty',
@@ -38,37 +38,34 @@
         9: 'ninety',
     }
     
-    function twoNumbers(number1) {
+    function twoNumbers(numberStr) {
 
-        if (number1[0] === '0') {
-            return numTwenty[number1[1]];
-        }else if (number1[0] === '1') {
-            return numTwenty[number1];
-        } else if (number1[1] === '0'){
-            return twentyPlus[number1[0]];
+        if (numberStr[0] === '0') {
+            return numTwenty[numberStr[1]];
+        }else if (numberStr[0] === '1') {
+            return numTwenty[numberStr];
+        } else if (numberStr[1] === '0'){
+            return twentyPlus[numberStr[0]];
         }
         else {
-            return `${twentyPlus[number1[0]] + ' ' + numTwenty[number1[1]]}`
-        }
-        
+            return `${twentyPlus[numberStr[0]] + ' ' + numTwenty[numberStr[1]]}`;
+        }   
     }
     
     
     switch (strLength) {
         case 1:
-            return numTwenty[number1];
+            return numTwenty[numberString];
             break;
         case 2:
-           return twoNumbers(number1);
+           return twoNumbers(numberString);
            break;
         case 3:
-            if (number1.slice(1) === '00') {
-                return numTwenty[number1[0]] + ' hundred';
+            if (numberString.slice(1) === '00') {
+                return numTwenty[numberString[0]] + ' hundred';
             } else {
-                return numTwenty[number1[0]] + ' hundred ' + twoNumbers(number1.slice(1));
+                return numTwenty[numberString[0]] + ' hundred ' + twoNumbers(numberString.slice(1));
             }
-            break;
-            
+            break;           
     }
 }
-
